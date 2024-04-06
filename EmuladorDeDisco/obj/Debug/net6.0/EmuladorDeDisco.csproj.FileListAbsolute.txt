@@ -1,0 +1,15 @@
+C:\dev\EmuladorDeDisco\EmuladorDeDisco\obj\Debug\net6.0\EmuladorDeDisco.csproj.AssemblyReference.cache
+C:\dev\EmuladorDeDisco\EmuladorDeDisco\obj\Debug\net6.0\EmuladorDeDisco.GeneratedMSBuildEditorConfig.editorconfig
+C:\dev\EmuladorDeDisco\EmuladorDeDisco\obj\Debug\net6.0\EmuladorDeDisco.AssemblyInfoInputs.cache
+C:\dev\EmuladorDeDisco\EmuladorDeDisco\obj\Debug\net6.0\EmuladorDeDisco.AssemblyInfo.cs
+C:\dev\EmuladorDeDisco\EmuladorDeDisco\obj\Debug\net6.0\EmuladorDeDisco.csproj.CoreCompileInputs.cache
+C:\dev\EmuladorDeDisco\EmuladorDeDisco\bin\Debug\net6.0\EmuladorDeDisco.exe
+C:\dev\EmuladorDeDisco\EmuladorDeDisco\bin\Debug\net6.0\EmuladorDeDisco.deps.json
+C:\dev\EmuladorDeDisco\EmuladorDeDisco\bin\Debug\net6.0\EmuladorDeDisco.runtimeconfig.json
+C:\dev\EmuladorDeDisco\EmuladorDeDisco\bin\Debug\net6.0\EmuladorDeDisco.dll
+C:\dev\EmuladorDeDisco\EmuladorDeDisco\bin\Debug\net6.0\EmuladorDeDisco.pdb
+C:\dev\EmuladorDeDisco\EmuladorDeDisco\obj\Debug\net6.0\EmuladorDeDisco.dll
+C:\dev\EmuladorDeDisco\EmuladorDeDisco\obj\Debug\net6.0\refint\EmuladorDeDisco.dll
+C:\dev\EmuladorDeDisco\EmuladorDeDisco\obj\Debug\net6.0\EmuladorDeDisco.pdb
+C:\dev\EmuladorDeDisco\EmuladorDeDisco\obj\Debug\net6.0\EmuladorDeDisco.genruntimeconfig.cache
+C:\dev\EmuladorDeDisco\EmuladorDeDisco\obj\Debug\net6.0\ref\EmuladorDeDisco.dll
