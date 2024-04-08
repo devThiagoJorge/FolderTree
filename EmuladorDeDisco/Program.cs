@@ -3,7 +3,7 @@
 Console.WriteLine("Escolha o diretório raiz!");
 //string caminho = Console.ReadLine()!;
 
-string caminho = @"C:\dev\EmuladorDeDisco\EmuladorDeDisco\TesteSistema";
+string caminho = @"C:\dev\FolderTree\EmuladorDeDisco\TesteSistema";
 var nomePasta = caminho.Split("\\").Last();
 var pasta = new Pasta(caminho, nomePasta);
 
@@ -22,10 +22,16 @@ do
         case 2:
             break;
         case 3:
+            //Console.WriteLine("Informe o último nível da pasta, onde será criado");
+            //string ultimoNivel = Console.ReadLine()!;
+
+            Console.WriteLine("Informe o nome da nova pasta");
+            string novaPasta = Console.ReadLine()!;
+            pasta.CriarPasta(novaPasta);
             Console.WriteLine("\nInforme o conteúdo do arquivo.");
             string conteudo = Console.ReadLine()!;
             var arquivo = new Arquivo("", conteudo);
-            arquivo.ManipularArquivo(pasta);
+            arquivo.ManipularArquivo(pasta, novaPasta);
             escolha = -1;
             break;
         default:
@@ -43,10 +49,8 @@ static void MenuSistema()
 {
     Console.WriteLine("----------------------------------- Menu -----------------------------------");
     Console.WriteLine(@"
-******** Escolha uma opção do sistema, digite os comandos: ********
+*** Escolha uma opção do sistema, digite os comandos: ***
 1 - Listar todos os diretórios 
-2 - Buscar diretório específico para salvar um novo arquivo
 3 - Adicionar um novo arquivo (irá adicionar uma nova pasta para o arquivo)
 0 - P/ sair do sistema");
 }
-

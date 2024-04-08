@@ -26,9 +26,15 @@
         public void MontarArvoreDePastas()
         {
             var folders = ObterTodasAsPastas().ToList();
+
+            if (folders.Count == 0)
+                return;
+
             bool passouPelasRaizes = false;
             var raizes = folders.Where(x => string.IsNullOrEmpty(x.Item2)).Select(x => x.Item1).ToList();
             string ultimaRaiz = folders.Last(x => string.IsNullOrEmpty(x.Item2)).Item1;
+
+            Console.WriteLine("Subpastas:");
 
             foreach (var raiz in raizes)
             {
@@ -50,7 +56,14 @@
         }
         #endregion
 
-
+        public void CriarPasta(string novaPasta)
+        {
+            string novaRaiz = $"{DiretorioRaiz}\\{novaPasta}";
+            if (!Directory.Exists(novaRaiz))
+            {
+                Directory.CreateDirectory(novaRaiz);
+            }
+        }
 
         public Tuple<string, bool> BuscarSubdiretorio(string buscarSubdiretorio)
         {
