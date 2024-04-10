@@ -1,37 +1,47 @@
 ﻿using EmuladorDeDisco.Classes;
+using System.IO;
 
-Console.WriteLine("Escolha o diretório raiz!");
-//string caminho = Console.ReadLine()!;
-
-string caminho = @"C:\dev\FolderTree\EmuladorDeDisco\TesteSistema";
-var nomePasta = caminho.Split("\\").Last();
-var pasta = new Pasta(caminho, nomePasta);
+var particao = Particao.ObterParticao();
+string mensagem = "";
 
 MenuSistema();
 int escolha = int.Parse(Console.ReadLine()!);
-
 
 do
 {
     switch (escolha)
     {
         case 1:
-            pasta.MontarArvoreDePastas();
+            Console.WriteLine("\nLista de mensagens salvas:");
+            particao.ListarMensagens();
             escolha = -1;
             break;
-        case 2:
-            break;
-        case 3:
-            //Console.WriteLine("Informe o último nível da pasta, onde será criado");
-            //string ultimoNivel = Console.ReadLine()!;
 
-            Console.WriteLine("Informe o nome da nova pasta");
-            string novaPasta = Console.ReadLine()!;
-            pasta.CriarPasta(novaPasta);
-            Console.WriteLine("\nInforme o conteúdo do arquivo.");
-            string conteudo = Console.ReadLine()!;
-            var arquivo = new Arquivo("", conteudo);
-            arquivo.ManipularArquivo(pasta, novaPasta);
+        case 2:
+            Console.WriteLine("Digite a mensagem:");
+            mensagem = Console.ReadLine()!;
+
+            if (particao.IndexDisponivelParaSalvar() == -1)
+            {
+                Console.WriteLine("A particão já foi completamente preenchida.");
+                Environment.Exit(0);
+            }
+            particao.CriarNaParticao(mensagem);
+            escolha = -1;
+            break;
+
+        case 3:
+            Console.WriteLine("Mensagem para apagar:");
+            mensagem = Console.ReadLine()!;
+
+            var existeMensagem = particao.ExisteMensagem(mensagem);
+
+            if (existeMensagem)
+            {
+                particao.ApagarMensagem(mensagem);
+            }
+
+            Console.WriteLine($"Mensagem: {mensagem} não existe");
             escolha = -1;
             break;
         default:
@@ -44,13 +54,19 @@ do
 
 
 
-
 static void MenuSistema()
 {
-    Console.WriteLine("----------------------------------- Menu -----------------------------------");
+    Console.WriteLine("\n\n----------------------------------- Menu -----------------------------------");
     Console.WriteLine(@"
 *** Escolha uma opção do sistema, digite os comandos: ***
-1 - Listar todos os diretórios 
-3 - Adicionar um novo arquivo (irá adicionar uma nova pasta para o arquivo)
+1 - Listar todas as mensagens 
+2 - Adicionar uma nova mensagem
+3 - Apagar mensagem
 0 - P/ sair do sistema");
 }
+
+
+
+
+
+

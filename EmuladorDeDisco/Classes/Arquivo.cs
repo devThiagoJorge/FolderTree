@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,29 +9,22 @@ namespace EmuladorDeDisco.Classes
 {
     public class Arquivo
     {
-        public string Nome { get; set; } = "";
         public string Conteudo { get; set; } = "";
-        public Pasta Pasta { get; set; }
 
-        public Arquivo(string nome, string conteudo)
+        public Arquivo(string conteudo)
         {
-            Nome = nome;
             Conteudo = conteudo;
         }
 
-        public void ManipularArquivo(Pasta pasta, string novaPasta)
-        {
-            var novaRaiz = $"{pasta.DiretorioRaiz}\\{novaPasta}";
-            CriarArquivo(novaRaiz);
-        }
-
-        private List<string> DefinirArquivosParaCriar(List<string> listaPalavras)
+        public List<string> DefinirArquivosParaCriar()
         {
             var listaArquivos = new List<string>();
-            string newPalavra = string.Empty;
-            foreach (var palavra in listaPalavras)
+            string arquivoNome = string.Empty;
+            var splitConteudo = Conteudo.Split(" ").ToList();
+
+            foreach (var palavra in splitConteudo)
             {
-                newPalavra = string.Empty;
+                arquivoNome = string.Empty;
                 if (palavra.Length <= 3)
                 {
                     listaArquivos.Add(palavra);
@@ -43,46 +35,50 @@ namespace EmuladorDeDisco.Classes
                 {
                     if (i % 3 != 0 || i == 0)
                     {
-                        newPalavra += palavra[i];
+                        arquivoNome += palavra[i];
                         continue;
                     }
 
-                    if (i == palavra.Length - 1)
-                    {
-                        newPalavra += palavra[i];
-                        continue;
-                    }
-
-                    listaArquivos.Add(newPalavra);
-                    newPalavra = string.Empty;
-                    newPalavra += palavra[i];
+                    listaArquivos.Add(arquivoNome);
+                    arquivoNome = string.Empty;
+                    arquivoNome += palavra[i];
                 }
 
-                listaArquivos.Add(newPalavra); ;
+                listaArquivos.Add(arquivoNome);
             }
 
             return listaArquivos;
         }
 
-        private void CriarArquivo(string raiz)
+        public void CriarArquivo(int nomeArquivo, int indiceLista)
         {
-            var splitConteudo = Conteudo.Split(" ").ToList();
-            var listaArquivos = DefinirArquivosParaCriar(splitConteudo);
+            var particao = Particao.ObterParticao();
+            var raiz = particao.DiretorioRaiz;
 
+            var listaArquivos = DefinirArquivosParaCriar();
 
-            string newRaiz = string.Empty;
-            foreach (var arquivo in listaArquivos)
+            for (int i = 0; i <= indiceLista; i++)
             {
-                newRaiz = $"{raiz}\\{arquivo}.txt";
+                if (i != indiceLista)
+                    continue;
 
-                File.Create(newRaiz).Close();
-                Console.WriteLine($"Novo arquivo criado em: {newRaiz}");
+                raiz = $"{raiz}\\{nomeArquivo}.txt";
+                File.Create(raiz).Close();
+                Console.WriteLine($"Novo arquivo criado em: {raiz}");
 
-                using var file = File.AppendText(newRaiz);
-                file.WriteLine(arquivo);
+                using var file = File.AppendText(raiz);
+                file.WriteLine(listaArquivos[i]);
                 file.Close();
-                newRaiz = string.Empty;
             }
+        }
+
+        public void DeletarArquivo(int nomeArquivo)
+        {
+            var particao = Particao.ObterParticao();
+            var raiz = particao.DiretorioRaiz;
+
+            raiz = $"{raiz}\\{nomeArquivo}.txt";
+            File.Delete(raiz);
         }
     }
 }
